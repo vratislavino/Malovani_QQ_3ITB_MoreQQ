@@ -39,10 +39,12 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         public virtual void Draw(Graphics g)
         {
-
+            if(highlighted)
+            {
+                g.DrawRectangle(Pens.Black, x, y, width, height);
+            }
         }
 
         public abstract bool IsMouseOver(int mx, int my);
-
     }
 }
