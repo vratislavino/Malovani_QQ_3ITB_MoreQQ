@@ -39,9 +39,9 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             addMoreShapesToolStripMenuItem = new ToolStripMenuItem();
+            canvas1 = new Canvas();
             statusStrip1 = new StatusStrip();
             colorDialog1 = new ColorDialog();
-            canvas1 = new Canvas();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -83,6 +83,7 @@
             button3.TabIndex = 4;
             button3.Text = "Clear";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -103,6 +104,7 @@
             button1.Size = new Size(94, 42);
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // checkBox1
             // 
@@ -161,15 +163,6 @@
             addMoreShapesToolStripMenuItem.Size = new Size(208, 26);
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
             // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Location = new Point(0, 946);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1736, 22);
-            statusStrip1.TabIndex = 0;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // canvas1
             // 
             canvas1.BackColor = Color.White;
@@ -179,6 +172,15 @@
             canvas1.Name = "canvas1";
             canvas1.Size = new Size(1736, 946);
             canvas1.TabIndex = 1;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Location = new Point(0, 946);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1736, 22);
+            statusStrip1.TabIndex = 0;
+            statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 

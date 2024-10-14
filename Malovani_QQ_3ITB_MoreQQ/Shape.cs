@@ -18,6 +18,10 @@ namespace Malovani_QQ_3ITB_MoreQQ
         protected Brush brush;
 
         private bool highlighted;
+        private static Pen outlinePen;
+
+        private int dragOffsetX;
+        private int dragOffsetY;
 
         public Shape(int x, int y, bool filled, Color color)
         {
@@ -30,6 +34,9 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
             pen = new Pen(color, 8f);
             brush = new SolidBrush(color);
+            outlinePen = new Pen(Color.Black, 2f);
+            outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            outlinePen.DashPattern = new float[] { 5, 5 };
         }
 
         public void Highlight(bool enable)
@@ -41,10 +48,22 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             if(highlighted)
             {
-                g.DrawRectangle(Pens.Black, x, y, width, height);
+                g.DrawRectangle(outlinePen, x, y, width, height);
             }
         }
 
         public abstract bool IsMouseOver(int mx, int my);
+
+        public void SetDragOffset(int mx, int my)
+        {
+            dragOffsetX = mx - x;
+            dragOffsetY = my - y;
+        }
+
+        public void Move(int mx, int my)
+        {
+            this.x = mx - dragOffsetX;
+            this.y = my - dragOffsetY;
+        }
     }
 }

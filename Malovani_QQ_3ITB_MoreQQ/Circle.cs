@@ -19,7 +19,13 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 g.FillEllipse(brush, x, y, width, height);
             } else
             {
-                g.DrawEllipse(pen, x, y, width, height);
+                g.DrawEllipse(
+                    pen, 
+                    x + pen.Width / 2, 
+                    y + pen.Width / 2, 
+                    width - pen.Width, 
+                    height- pen.Width
+                    );
             }
             base.Draw(g);
         }

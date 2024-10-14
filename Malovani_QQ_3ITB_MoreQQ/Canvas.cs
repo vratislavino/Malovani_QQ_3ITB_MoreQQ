@@ -11,11 +11,13 @@ using System.Windows.Forms;
 
 namespace Malovani_QQ_3ITB_MoreQQ
 {
+
     public partial class Canvas : UserControl
     {
         private List<Shape> shapes = new List<Shape>();
 
         Shape currentShape = null;
+        bool isDragging = false;
 
         public Canvas()
         {
@@ -28,27 +30,51 @@ namespace Malovani_QQ_3ITB_MoreQQ
             Invalidate();
         }
 
+        public void ClearShapes()
+        {
+            shapes.Clear();
+            currentShape = null;
+            Invalidate();
+        }
+
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                if (currentShape != null)
+                {
+                    currentShape.SetDragOffset(e.X, e.Y);
+                    isDragging = true;
+                }
+            }
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            var shape = shapes.FirstOrDefault(s => s.IsMouseOver(e.X, e.Y));
-            if (shape != null)
-            {
-                if(currentShape != null)
-                    currentShape.Highlight(false);
+            if (shapes.Count == 0) return;
 
-                currentShape = shape;
-                currentShape.Highlight(true);
-            } else
+            if (isDragging)
             {
-                if (currentShape != null)
+                currentShape.Move(e.X, e.Y);
+            }
+            else
+            {
+                var shape = shapes.FirstOrDefault(s => s.IsMouseOver(e.X, e.Y));
+                if (shape != null)
                 {
-                    currentShape.Highlight(false);
-                    currentShape = null;
+                    if (currentShape != null)
+                        currentShape.Highlight(false);
+
+                    currentShape = shape;
+                    currentShape.Highlight(true);
+                }
+                else
+                {
+                    if (currentShape != null)
+                    {
+                        currentShape.Highlight(false);
+                        currentShape = null;
+                    }
                 }
             }
             Invalidate();
@@ -56,7 +82,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
-
+            isDragging = false;
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
