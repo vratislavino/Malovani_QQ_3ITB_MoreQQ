@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Malovani_QQ_3ITB_MoreQQ
 {
     public partial class Form1 : Form
@@ -9,8 +11,8 @@ namespace Malovani_QQ_3ITB_MoreQQ
      * hezèí vykreslení ---
      * hezèí èára ---
      * pøesouvání objektù ---
-     * clear objektù
-     * square
+     * clear objektù ---
+     * square ---
      * reflexe - (assembly)
      * ukládání
      */
@@ -20,15 +22,32 @@ namespace Malovani_QQ_3ITB_MoreQQ
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Assembly ass = Assembly.GetExecutingAssembly();
+            var types = ass.GetTypes();
+            var shapeTypes = types.Where(t => t.IsSubclassOf(typeof(Shape)));
+
+            comboBox1.Items.AddRange(shapeTypes.ToArray());
+            
+            if(shapeTypes.Count() > 0)
+                comboBox1.SelectedIndex = 0;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            canvas1.AddShape(
-                new Circle(
+            var selectedType = comboBox1.SelectedItem as Type;
+            if(selectedType != null)
+            {
+                var newShape = Activator.CreateInstance(
+                    selectedType,
                     canvas1.Width / 2,
                     canvas1.Height / 2,
                     checkBox1.Checked,
-                    button1.BackColor)
-                );
+                    button1.BackColor
+                    ) as Shape;
+                canvas1.AddShape(newShape);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,7 +60,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show(
+            if (MessageBox.Show(
                 "Do you really want to destroy all your work?",
                 "Are you sure?",
                 MessageBoxButtons.YesNo,
@@ -51,5 +70,6 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 canvas1.ClearShapes();
             }
         }
+
     }
 }

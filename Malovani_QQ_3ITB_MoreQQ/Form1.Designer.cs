@@ -88,7 +88,7 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            button2.Location = new Point(638, 35);
+            button2.Location = new Point(865, 31);
             button2.Name = "button2";
             button2.Size = new Size(243, 54);
             button2.TabIndex = 3;
@@ -99,7 +99,7 @@
             // button1
             // 
             button1.BackColor = Color.Red;
-            button1.Location = new Point(507, 41);
+            button1.Location = new Point(734, 37);
             button1.Name = "button1";
             button1.Size = new Size(94, 42);
             button1.TabIndex = 2;
@@ -110,7 +110,7 @@
             // 
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            checkBox1.Location = new Point(379, 41);
+            checkBox1.Location = new Point(606, 37);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(105, 42);
             checkBox1.TabIndex = 1;
@@ -122,10 +122,9 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 238);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Kolecko", "Ctverec" });
             comboBox1.Location = new Point(12, 40);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(331, 45);
+            comboBox1.Size = new Size(572, 45);
             comboBox1.TabIndex = 0;
             // 
             // menuStrip1
@@ -191,6 +190,7 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
