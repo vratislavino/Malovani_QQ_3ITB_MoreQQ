@@ -15,6 +15,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
     public partial class Canvas : UserControl
     {
         private List<Shape> shapes = new List<Shape>();
+        public IReadOnlyList<Shape> Shapes => shapes;
 
         Shape currentShape = null;
         bool isDragging = false;

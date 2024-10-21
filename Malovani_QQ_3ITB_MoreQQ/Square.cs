@@ -11,7 +11,11 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public Square(int x, int y, bool filled, Color color) : base(x, y, filled, color)
         {
         }
-        
+
+        public Square(ShapeDTO data) : base(data)
+        {
+        }
+
         public override void Draw(Graphics g)
         {
             if(filled)

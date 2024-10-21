@@ -12,6 +12,10 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
         }
 
+        public Circle(ShapeDTO data) : base(data)
+        {
+        }
+
         public override void Draw(Graphics g)
         {
             if(filled)

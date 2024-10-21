@@ -14,7 +14,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         protected int height;
         protected bool filled;
         protected Color color;
-        protected Pen pen;
+        public Pen pen;
         protected Brush brush;
 
         private bool highlighted;
@@ -31,13 +31,31 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.y = y - height / 2;
             this.filled = filled;
             this.color = color;
+            
+            InitRuntimeValues();
+        }
 
+        public Shape(ShapeDTO data)
+        {
+            this.width = data.width;
+            this.height = data.height;
+            this.x = data.x;
+            this.y = data.y;
+            this.filled = data.filled;
+            this.color = Color.FromArgb(data.r, data.g, data.b);
+            
+            InitRuntimeValues();
+        } 
+
+        private void InitRuntimeValues()
+        {
             pen = new Pen(color, 8f);
             brush = new SolidBrush(color);
             outlinePen = new Pen(Color.Black, 2f);
             outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             outlinePen.DashPattern = new float[] { 5, 5 };
         }
+
 
         public void Highlight(bool enable)
         {
@@ -64,6 +82,40 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             this.x = mx - dragOffsetX;
             this.y = my - dragOffsetY;
+        }
+
+        public ShapeDTO GetDTO()
+        {
+            return new ShapeDTO(this);
+        }
+
+        public class ShapeDTO
+        {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+            public bool filled;
+            public int r;
+            public int g;
+            public int b;
+
+            public string shapeType;
+
+            public ShapeDTO() { }
+
+            public ShapeDTO(Shape s)
+            {
+                this.x = s.x;
+                this.y = s.y;
+                this.width = s.width;
+                this.height = s.height;
+                this.filled = s.filled;
+                this.r = s.color.R;
+                this.g = s.color.G;
+                this.b = s.color.B;
+                this.shapeType = s.GetType().ToString();
+            }
         }
     }
 }
