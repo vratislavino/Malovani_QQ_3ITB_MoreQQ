@@ -27,13 +27,18 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void Form1_Load(object sender, EventArgs e)
         {
             Assembly ass = Assembly.GetExecutingAssembly();
+            LoadTypesFromAssembly(ass);
+
+            if (comboBox1.Items.Count > 0)
+                comboBox1.SelectedIndex = 0;
+        }
+
+        private void LoadTypesFromAssembly(Assembly ass)
+        {
             var types = ass.GetTypes();
             var shapeTypes = types.Where(t => t.IsSubclassOf(typeof(Shape)));
 
             comboBox1.Items.AddRange(shapeTypes.ToArray());
-
-            if (shapeTypes.Count() > 0)
-                comboBox1.SelectedIndex = 0;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -78,7 +83,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
             SaveFileDialog sfd = new SaveFileDialog();
             //sfd.FileName = ""; // default path
             sfd.Filter = "Shapes JSON (.json)|*.json";
-            if(sfd.ShowDialog() == DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 string path = sfd.FileName;
                 fileManager.SaveShapes(path, canvas1.Shapes);
@@ -89,13 +94,31 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Shapes JSON (.json)|*.json";
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 string path = ofd.FileName;
                 var shapes = fileManager.LoadShapes(path);
-                foreach(var shape in shapes)
+                foreach (var shape in shapes)
                 {
                     canvas1.AddShape(shape);
+                }
+            }
+        }
+
+        private void addMoreShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Shapes Library (.dll)|*.dll";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string path = ofd.FileName;
+                Assembly ass = fileManager.LoadAssemblyFromFile(path);
+                if(ass != null)
+                {
+                    LoadTypesFromAssembly(ass);
+                } else
+                {
+                    MessageBox.Show("Nepodaøilo se naèíst knihovnu " + path);
                 }
             }
         }
