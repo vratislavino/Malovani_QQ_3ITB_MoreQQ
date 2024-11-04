@@ -12,7 +12,6 @@ namespace Malovani_QQ_3ITB_MoreQQ
     internal class FileManager
     {
         Dictionary<string, Assembly> loadedAssemblies = new Dictionary<string, Assembly>();
-
         public void SaveShapes(string path, IEnumerable<Shape> shapes)
         {
             var content = JsonConvert.SerializeObject(shapes.Select(s => s.GetDTO()));
@@ -22,20 +21,13 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public IEnumerable<Shape> LoadShapes(string path)
         {
             var content = File.ReadAllText(path);
-            var dtos = JsonConvert.DeserializeObject<IEnumerable<Shape.ShapeDTO>>(content);
+            var dtos = JsonConvert.DeserializeObject<IEnumerable<Shape.ShapeDTO>>(content) ?? Enumerable.Empty<Shape.ShapeDTO>();
 
-            // Some fixes here
             return dtos.Select(dto =>
             {
-                if(loadedAssemblies.ContainsKey(dto.shapeType))
-                {
-                    var type = loadedAssemblies[dto.shapeType].GetType(dto.shapeType);
-                    return Activator.CreateInstance(type, dto) as Shape;
-                } else
-                {
-                    return null;
-                }
-            });
+                var type = Type.GetType(dto.shapeType);
+                return (Shape?)Activator.CreateInstance(type, dto);
+            }).Where(s => s != null)!;
         }
 
         public Assembly LoadAssemblyFromFile(string path)
@@ -51,45 +43,54 @@ namespace Malovani_QQ_3ITB_MoreQQ
             }
         }
 
-        public void CacheDll(string path)
+        public void ChacheDll(string path)
         {
             string filename = Path.GetFileName(path);
-            var targetPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        
-            targetPath = Path.Combine(targetPath, "MalovaniQQ");
-            
-            if(!Directory.Exists(targetPath))
-                Directory.CreateDirectory(targetPath);
+            var tagretPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            targetPath = Path.Combine(targetPath, filename);
+            tagretPath = Path.Combine(tagretPath, "MalovaniQQ");
+            if (!Directory.Exists(tagretPath))
+            {
+                Directory.CreateDirectory(tagretPath);
+            }
 
-            File.Copy(path, targetPath, true);
-            
-            Debug.WriteLine(targetPath);
+            tagretPath = Path.Combine(tagretPath, filename);
+            File.Copy(path, tagretPath, true);
+            Debug.WriteLine(tagretPath);
         }
 
         public List<Assembly> GetAllCachedDlls()
         {
             var targetPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             targetPath = Path.Combine(targetPath, "MalovaniQQ");
-            
-            if(!Directory.Exists(targetPath))
-                return new List<Assembly>();
 
-            var dlls = Directory.GetFiles(targetPath, "*.dll");
-            List<Assembly> result = new List<Assembly>();
-            foreach (var dll in dlls)
+            if (!Directory.Exists(targetPath))
             {
-                var ass = LoadAssemblyFromFile(dll);
-                if(ass != null)
+                return new List<Assembly>();
+            }
+
+            var ddls = Directory.GetFiles(targetPath, "*.dll");
+            List<Assembly> result = new List<Assembly>();
+
+            foreach (var ddl in ddls)
+            {
+                try
                 {
-                    result.Add(ass);
+                    var ass = LoadAssemblyFromFile(ddl);
+                    if (ass != null)
+                    {
+                        result.Add(ass);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
             return result;
         }
 
-        public void AddAssembly(Type t, Assembly ass)
+        internal void AddAssembly(Type t, Assembly ass)
         {
             loadedAssemblies.Add(t.FullName, ass);
         }

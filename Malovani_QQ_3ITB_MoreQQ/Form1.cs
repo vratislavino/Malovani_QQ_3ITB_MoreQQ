@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Malovani_QQ_3ITB_MoreQQ
@@ -5,16 +6,16 @@ namespace Malovani_QQ_3ITB_MoreQQ
     public partial class Form1 : Form
     {
         /*
-     Zeptat se DJ na svìtla
+     Zeptat se DJ na svï¿½tla
      TODO: 
      * volba barvy ---
-     * hezèí vykreslení ---
-     * hezèí èára ---
-     * pøesouvání objektù ---
-     * clear objektù ---
+     * hezï¿½ï¿½ vykreslenï¿½ ---
+     * hezï¿½ï¿½ ï¿½ï¿½ra ---
+     * pï¿½esouvï¿½nï¿½ objektï¿½ ---
+     * clear objektï¿½ ---
      * square ---
      * reflexe - (assembly)
-     * ukládání
+     * uklï¿½dï¿½nï¿½
      */
 
         FileManager fileManager = new FileManager();
@@ -22,13 +23,13 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public Form1()
         {
             InitializeComponent();
-            canvas1.ShapesChanged += OnShapesChanged;
+            canvas1.ShapeChanged += OnShapesChanged;
         }
 
         private void OnShapesChanged()
         {
             listBox1.Items.Clear();
-            foreach (var item in canvas1.Shapes)
+            foreach(var item in canvas1.Shapes)
             {
                 listBox1.Items.Add(item);
             }
@@ -46,14 +47,17 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void LoadTypesFromAssembly(Assembly ass)
         {
             var types = ass.GetTypes();
-            var shapeTypes = types.Where(t => {
+            var shapeTypes = types.Where(t =>
+            {
                 if (t.IsSubclassOf(typeof(Shape)))
                 {
                     fileManager.AddAssembly(t, ass);
                     return true;
                 }
                 return false;
-            });
+
+            }
+            );
 
             comboBox1.Items.AddRange(shapeTypes.ToArray());
         }
@@ -70,7 +74,14 @@ namespace Malovani_QQ_3ITB_MoreQQ
                     checkBox1.Checked,
                     button1.BackColor
                     ) as Shape;
-                canvas1.AddShape(newShape);
+                if (newShape != null)
+                {
+                    canvas1.AddShape(newShape);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new shape.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -98,8 +109,9 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            //sfd.FileName = ""; // default path
-            sfd.Filter = "Shapes JSON (.json)|*.json";
+            sfd.FileName = "shapes";
+            sfd.Filter = "Shapes JSON (.json) |*.json";
+
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 string path = sfd.FileName;
@@ -110,22 +122,14 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Shapes JSON (.json)|*.json";
+            ofd.Filter = "Shapes JSON (.json) |*.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 string path = ofd.FileName;
                 var shapes = fileManager.LoadShapes(path);
-                int notLoadedCounter = 0;
                 foreach (var shape in shapes)
                 {
-                    if(shape != null)
-                        canvas1.AddShape(shape);
-                    else
-                        notLoadedCounter++;
-                }
-                if(notLoadedCounter > 0)
-                {
-                    MessageBox.Show($"{notLoadedCounter} objektù se nepodaøilo naèíst, protože chybí knihovny, ze kterých byly vytvoøeny.");
+                    canvas1.AddShape(shape);
                 }
             }
         }
@@ -133,20 +137,19 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void addMoreShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Shapes Library (.dll)|*.dll";
+            ofd.Filter = "Shapes Library (.dll) |*.dll";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 string path = ofd.FileName;
                 Assembly ass = fileManager.LoadAssemblyFromFile(path);
-
                 if (ass != null)
                 {
-                    fileManager.CacheDll(path);
                     LoadTypesFromAssembly(ass);
+                    fileManager.ChacheDll(path);
                 }
                 else
                 {
-                    MessageBox.Show("Nepodaøilo se naèíst knihovnu " + path);
+                    MessageBox.Show("Error loading dll!");
                 }
             }
         }

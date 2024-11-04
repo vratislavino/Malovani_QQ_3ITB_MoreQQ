@@ -14,12 +14,12 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
     public partial class Canvas : UserControl
     {
-        public event Action ShapesChanged;
+        public event Action ShapeChanged;
 
         private List<Shape> shapes = new List<Shape>();
         public IReadOnlyList<Shape> Shapes => shapes;
 
-        Shape currentShape = null;
+        Shape? currentShape = null;
         bool isDragging = false;
 
         public Canvas()
@@ -31,7 +31,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             shapes.Add(shape);
             Invalidate();
-            ShapesChanged?.Invoke();
+            ShapeChanged?.Invoke();
         }
 
         public void ClearShapes()
@@ -39,7 +39,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
             shapes.Clear();
             currentShape = null;
             Invalidate();
-            ShapesChanged?.Invoke();
+            ShapeChanged?.Invoke();
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
@@ -58,7 +58,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             if (shapes.Count == 0) return;
 
-            if (isDragging)
+            if (isDragging && currentShape != null)
             {
                 currentShape.Move(e.X, e.Y);
             }
@@ -67,9 +67,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 var shape = shapes.FirstOrDefault(s => s.IsMouseOver(e.X, e.Y));
                 if (shape != null)
                 {
-                    if (currentShape != null)
-                        currentShape.Highlight(false);
-
+                    currentShape?.Highlight(false);
                     currentShape = shape;
                     currentShape.Highlight(true);
                 }
@@ -83,7 +81,6 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 }
             }
             Invalidate();
-            ShapesChanged?.Invoke();
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
@@ -97,6 +94,11 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             shapes.ForEach(shape => shape.Draw(e.Graphics));
+        }
+
+        private void Canvas_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

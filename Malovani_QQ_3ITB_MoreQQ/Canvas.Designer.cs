@@ -39,6 +39,7 @@
             DoubleBuffered = true;
             Name = "Canvas";
             Size = new Size(799, 513);
+            Load += Canvas_Load;
             Paint += Canvas_Paint;
             MouseDown += Canvas_MouseDown;
             MouseMove += Canvas_MouseMove;

@@ -40,11 +40,11 @@
             loadToolStripMenuItem = new ToolStripMenuItem();
             addMoreShapesToolStripMenuItem = new ToolStripMenuItem();
             loadShapesFromAppDataToolStripMenuItem = new ToolStripMenuItem();
+            splitContainer2 = new SplitContainer();
             canvas1 = new Canvas();
+            listBox1 = new ListBox();
             statusStrip1 = new StatusStrip();
             colorDialog1 = new ColorDialog();
-            splitContainer2 = new SplitContainer();
-            listBox1 = new ListBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -76,8 +76,8 @@
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Panel2.Controls.Add(statusStrip1);
-            splitContainer1.Size = new Size(1736, 1072);
-            splitContainer1.SplitterDistance = 100;
+            splitContainer1.Size = new Size(1736, 1055);
+            splitContainer1.SplitterDistance = 98;
             splitContainer1.TabIndex = 0;
             // 
             // button3
@@ -179,25 +179,6 @@
             loadShapesFromAppDataToolStripMenuItem.Text = "Load shapes from AppData";
             loadShapesFromAppDataToolStripMenuItem.Click += loadShapesFromAppDataToolStripMenuItem_Click;
             // 
-            // canvas1
-            // 
-            canvas1.BackColor = Color.White;
-            canvas1.BorderStyle = BorderStyle.FixedSingle;
-            canvas1.Dock = DockStyle.Fill;
-            canvas1.Location = new Point(0, 0);
-            canvas1.Name = "canvas1";
-            canvas1.Size = new Size(1427, 946);
-            canvas1.TabIndex = 1;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Location = new Point(0, 946);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1736, 22);
-            statusStrip1.TabIndex = 0;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Fill;
@@ -211,9 +192,19 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(listBox1);
-            splitContainer2.Size = new Size(1736, 946);
-            splitContainer2.SplitterDistance = 1427;
+            splitContainer2.Size = new Size(1736, 931);
+            splitContainer2.SplitterDistance = 1375;
             splitContainer2.TabIndex = 2;
+            // 
+            // canvas1
+            // 
+            canvas1.BackColor = Color.White;
+            canvas1.BorderStyle = BorderStyle.FixedSingle;
+            canvas1.Dock = DockStyle.Fill;
+            canvas1.Location = new Point(0, 0);
+            canvas1.Name = "canvas1";
+            canvas1.Size = new Size(1375, 931);
+            canvas1.TabIndex = 1;
             // 
             // listBox1
             // 
@@ -221,14 +212,23 @@
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(0, 0);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(305, 946);
+            listBox1.Size = new Size(357, 931);
             listBox1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Location = new Point(0, 931);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1736, 22);
+            statusStrip1.TabIndex = 0;
+            statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1736, 1072);
+            ClientSize = new Size(1736, 1055);
             Controls.Add(splitContainer1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";

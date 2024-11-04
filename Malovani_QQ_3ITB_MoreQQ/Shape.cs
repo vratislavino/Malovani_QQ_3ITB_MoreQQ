@@ -43,9 +43,9 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.y = data.y;
             this.filled = data.filled;
             this.color = Color.FromArgb(data.r, data.g, data.b);
-            
+
             InitRuntimeValues();
-        } 
+        }
 
         private void InitRuntimeValues()
         {
@@ -64,7 +64,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         public virtual void Draw(Graphics g)
         {
-            if(highlighted)
+            if (highlighted)
             {
                 g.DrawRectangle(outlinePen, x, y, width, height);
             }
@@ -119,3 +119,5 @@ namespace Malovani_QQ_3ITB_MoreQQ
         }
     }
 }
+
+

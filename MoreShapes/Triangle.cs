@@ -10,6 +10,15 @@ namespace MoreShapes
 {
     public class Triangle : Shape
     {
+        public override bool IsMouseOver(int mx, int my)
+        {
+            return
+                mx >= x &&
+                mx <= x + width &&
+                my >= y &&
+                my <= y + height;
+        }
+
         public Triangle(int x, int y, bool filled, Color color) : base(x, y, filled, color)
         {
         }
@@ -20,31 +29,25 @@ namespace MoreShapes
 
         public override void Draw(Graphics g)
         {
-            if(filled)
+            float shrinkAmount = pen.Width / 2;
+            Point[] points = new[]
             {
-                g.FillPolygon(brush, new Point[] { 
-                    new Point(x, y + height),
-                    new Point(x + width, y + height),
-                    new Point(x + width / 2, y)
-                });
-            } else
+                    new Point((int)(x + width / 2), (int)(y + shrinkAmount)),                         
+                    new Point((int)(x + width - shrinkAmount), (int)(y + height / 2)),               
+                    new Point((int)(x + (width * 0.8) - shrinkAmount), (int)(y + height - shrinkAmount)), 
+                    new Point((int)(x + (width * 0.2) + shrinkAmount), (int)(y + height - shrinkAmount)), 
+                    new Point((int)(x + shrinkAmount), (int)(y + height / 2))
+            };
+
+            if (filled)
             {
-                g.DrawPolygon(pen, new Point[] {
-                    new Point(x, y + height),
-                    new Point(x + width, y + height),
-                    new Point(x + width / 2, y)
-                });
+                g.FillPolygon(brush, points);
+            }
+            else
+            {
+                g.DrawPolygon(pen, points);
             }
             base.Draw(g);
-        }
-
-        public override bool IsMouseOver(int mx, int my)
-        {
-            return 
-                mx >= x && 
-                mx <= x + width &&
-                my >= y &&
-                my <= y + height;
         }
     }
 }
