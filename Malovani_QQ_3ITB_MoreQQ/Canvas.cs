@@ -14,6 +14,8 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
     public partial class Canvas : UserControl
     {
+        public event Action ShapeChanged;
+
         private List<Shape> shapes = new List<Shape>();
         public IReadOnlyList<Shape> Shapes => shapes;
 
@@ -29,6 +31,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             shapes.Add(shape);
             Invalidate();
+            ShapeChanged?.Invoke();
         }
 
         public void ClearShapes()
@@ -36,6 +39,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
             shapes.Clear();
             currentShape = null;
             Invalidate();
+            ShapeChanged?.Invoke();
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
@@ -90,6 +94,11 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             shapes.ForEach(shape => shape.Draw(e.Graphics));
+        }
+
+        private void Canvas_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

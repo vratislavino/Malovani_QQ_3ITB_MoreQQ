@@ -23,6 +23,16 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public Form1()
         {
             InitializeComponent();
+            canvas1.ShapeChanged += OnShapesChanged;
+        }
+
+        private void OnShapesChanged()
+        {
+            listBox1.Items.Clear();
+            foreach(var item in canvas1.Shapes)
+            {
+                listBox1.Items.Add(item);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,12 +47,19 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void LoadTypesFromAssembly(Assembly ass)
         {
             var types = ass.GetTypes();
-            var shapeTypes = types.Where(t => t.IsSubclassOf(typeof(Shape)));
+            var shapeTypes = types.Where(t =>
+            {
+                if (t.IsSubclassOf(typeof(Shape)))
+                {
+                    fileManager.AddAssembly(t, ass);
+                    return true;
+                }
+                return false;
+
+            }
+            );
 
             comboBox1.Items.AddRange(shapeTypes.ToArray());
-
-            // Select the added assembly in comboBox1
-            comboBox1.SelectedItem = ass;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -128,14 +145,19 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 if (ass != null)
                 {
                     LoadTypesFromAssembly(ass);
-
-              
+                    fileManager.ChacheDll(path);
                 }
                 else
                 {
                     MessageBox.Show("Error loading dll!");
                 }
             }
+        }
+
+        private void loadShapesFromAppDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<Assembly> asses = fileManager.GetAllCachedDlls();
+            asses.ForEach(ass => LoadTypesFromAssembly(ass));
         }
     }
 }
