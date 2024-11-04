@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Malovani_QQ_3ITB_MoreQQ
@@ -17,6 +18,8 @@ namespace Malovani_QQ_3ITB_MoreQQ
      * ukládání
      */
 
+        FileManager fileManager = new FileManager();
+
         public Form1()
         {
             InitializeComponent();
@@ -25,19 +28,27 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void Form1_Load(object sender, EventArgs e)
         {
             Assembly ass = Assembly.GetExecutingAssembly();
+            LoadTypesFromAssembly(ass);
+
+            if (comboBox1.Items.Count > 0)
+                comboBox1.SelectedIndex = 0;
+        }
+
+        private void LoadTypesFromAssembly(Assembly ass)
+        {
             var types = ass.GetTypes();
             var shapeTypes = types.Where(t => t.IsSubclassOf(typeof(Shape)));
 
             comboBox1.Items.AddRange(shapeTypes.ToArray());
-            
-            if(shapeTypes.Count() > 0)
-                comboBox1.SelectedIndex = 0;
+
+            // Select the added assembly in comboBox1
+            comboBox1.SelectedItem = ass;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             var selectedType = comboBox1.SelectedItem as Type;
-            if(selectedType != null)
+            if (selectedType != null)
             {
                 var newShape = Activator.CreateInstance(
                     selectedType,
@@ -46,7 +57,14 @@ namespace Malovani_QQ_3ITB_MoreQQ
                     checkBox1.Checked,
                     button1.BackColor
                     ) as Shape;
-                canvas1.AddShape(newShape);
+                if (newShape != null)
+                {
+                    canvas1.AddShape(newShape);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new shape.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -71,5 +89,54 @@ namespace Malovani_QQ_3ITB_MoreQQ
             }
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "shapes";
+            sfd.Filter = "Shapes JSON (.json) |*.json";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string path = sfd.FileName;
+                fileManager.SaveShapes(path, canvas1.Shapes);
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Shapes JSON (.json) |*.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string path = ofd.FileName;
+                var shapes = fileManager.LoadShapes(path);
+
+                foreach (var shape in shapes)
+                {
+                    canvas1.AddShape(shape);
+                }
+            }
+        }
+
+        private void addMoreShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Shapes Library (.dll) |*.dll";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string path = ofd.FileName;
+                Assembly ass = fileManager.LoadAssemblyFromFile(path);
+                if (ass != null)
+                {
+                    LoadTypesFromAssembly(ass);
+
+              
+                }
+                else
+                {
+                    MessageBox.Show("Error loading dll!");
+                }
+            }
+        }
     }
 }

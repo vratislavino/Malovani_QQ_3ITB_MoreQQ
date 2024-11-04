@@ -11,13 +11,18 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public Square(int x, int y, bool filled, Color color) : base(x, y, filled, color)
         {
         }
-        
+
+        public Square(ShapeDTO data) : base(data)
+        {
+        }
+
         public override void Draw(Graphics g)
         {
-            if(filled)
+            if (filled)
             {
                 g.FillRectangle(brush, x, y, width, height);
-            } else
+            }
+            else
             {
                 g.DrawRectangle(
                     pen,
@@ -32,10 +37,10 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         public override bool IsMouseOver(int mx, int my)
         {
-            return 
-                mx >= x && 
-                mx <= x + width && 
-                my >= y && 
+            return
+                mx >= x &&
+                mx <= x + width &&
+                my >= y &&
                 my <= y + height;
         }
     }

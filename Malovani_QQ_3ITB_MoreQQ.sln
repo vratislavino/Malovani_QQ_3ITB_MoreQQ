@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Malovani_QQ_3ITB_MoreQQ", "Malovani_QQ_3ITB_MoreQQ\Malovani_QQ_3ITB_MoreQQ.csproj", "{62ABB011-5E6A-4325-BCB6-EEF51D918084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Malovani_QQ_3ITB_MoreQQ", "Malovani_QQ_3ITB_MoreQQ\Malovani_QQ_3ITB_MoreQQ.csproj", "{62ABB011-5E6A-4325-BCB6-EEF51D918084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreShapes", "MoreShapes\MoreShapes.csproj", "{39FAF165-DB95-471A-8169-1C66E01DC079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JanxyxyShapes", "JanxyxyShapes\JanxyxyShapes.csproj", "{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{62ABB011-5E6A-4325-BCB6-EEF51D918084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62ABB011-5E6A-4325-BCB6-EEF51D918084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62ABB011-5E6A-4325-BCB6-EEF51D918084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FAF165-DB95-471A-8169-1C66E01DC079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FAF165-DB95-471A-8169-1C66E01DC079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FAF165-DB95-471A-8169-1C66E01DC079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FAF165-DB95-471A-8169-1C66E01DC079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

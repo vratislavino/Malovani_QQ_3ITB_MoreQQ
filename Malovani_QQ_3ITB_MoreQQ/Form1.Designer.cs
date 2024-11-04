@@ -69,8 +69,8 @@
             // 
             splitContainer1.Panel2.Controls.Add(canvas1);
             splitContainer1.Panel2.Controls.Add(statusStrip1);
-            splitContainer1.Size = new Size(1736, 1072);
-            splitContainer1.SplitterDistance = 100;
+            splitContainer1.Size = new Size(1736, 1055);
+            splitContainer1.SplitterDistance = 98;
             splitContainer1.TabIndex = 0;
             // 
             // button3
@@ -147,20 +147,23 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(208, 26);
+            saveToolStripMenuItem.Size = new Size(224, 26);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new Size(208, 26);
+            loadToolStripMenuItem.Size = new Size(224, 26);
             loadToolStripMenuItem.Text = "Load";
+            loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // addMoreShapesToolStripMenuItem
             // 
             addMoreShapesToolStripMenuItem.Name = "addMoreShapesToolStripMenuItem";
-            addMoreShapesToolStripMenuItem.Size = new Size(208, 26);
+            addMoreShapesToolStripMenuItem.Size = new Size(224, 26);
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
+            addMoreShapesToolStripMenuItem.Click += addMoreShapesToolStripMenuItem_Click;
             // 
             // canvas1
             // 
@@ -169,13 +172,13 @@
             canvas1.Dock = DockStyle.Fill;
             canvas1.Location = new Point(0, 0);
             canvas1.Name = "canvas1";
-            canvas1.Size = new Size(1736, 946);
+            canvas1.Size = new Size(1736, 931);
             canvas1.TabIndex = 1;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Location = new Point(0, 946);
+            statusStrip1.Location = new Point(0, 931);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(1736, 22);
             statusStrip1.TabIndex = 0;
@@ -185,7 +188,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1736, 1072);
+            ClientSize = new Size(1736, 1055);
             Controls.Add(splitContainer1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";

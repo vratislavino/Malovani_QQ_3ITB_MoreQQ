@@ -32,6 +32,25 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.filled = filled;
             this.color = color;
 
+            InitRuntimeValues();
+        }
+
+
+
+        public Shape(ShapeDTO data)
+        {
+            this.width = data.width;
+            this.height = data.height;
+            this.x = data.x;
+            this.y = data.y;
+            this.filled = data.filled;
+            this.color = Color.FromArgb(data.r, data.g, data.b);
+
+            InitRuntimeValues();
+        }
+
+        private void InitRuntimeValues()
+        {
             pen = new Pen(color, 8f);
             brush = new SolidBrush(color);
             outlinePen = new Pen(Color.Black, 2f);
@@ -46,7 +65,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         public virtual void Draw(Graphics g)
         {
-            if(highlighted)
+            if (highlighted)
             {
                 g.DrawRectangle(outlinePen, x, y, width, height);
             }
@@ -65,5 +84,43 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.x = mx - dragOffsetX;
             this.y = my - dragOffsetY;
         }
+
+        public ShapeDTO GetDTO()
+        {
+            return new ShapeDTO(this);
+        }
+
+        public class ShapeDTO
+        {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+            public bool filled;
+            public int r;
+            public int g;
+            public int b;
+
+            public string ShapeType;
+
+            public ShapeDTO()
+            {
+            }
+
+            public ShapeDTO(Shape shape)
+            {
+                x = shape.x;
+                y = shape.y;
+                width = shape.width;
+                height = shape.height;
+                filled = shape.filled;
+                r = shape.color.R;
+                g = shape.color.G;
+                b = shape.color.B;
+                ShapeType = shape.GetType().ToString();
+            }
+        }
     }
 }
+
+

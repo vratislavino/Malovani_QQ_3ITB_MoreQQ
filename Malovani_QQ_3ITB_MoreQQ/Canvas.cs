@@ -15,8 +15,9 @@ namespace Malovani_QQ_3ITB_MoreQQ
     public partial class Canvas : UserControl
     {
         private List<Shape> shapes = new List<Shape>();
+        public IReadOnlyList<Shape> Shapes => shapes;
 
-        Shape currentShape = null;
+        Shape? currentShape = null;
         bool isDragging = false;
 
         public Canvas()
@@ -53,7 +54,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             if (shapes.Count == 0) return;
 
-            if (isDragging)
+            if (isDragging && currentShape != null)
             {
                 currentShape.Move(e.X, e.Y);
             }
@@ -62,9 +63,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 var shape = shapes.FirstOrDefault(s => s.IsMouseOver(e.X, e.Y));
                 if (shape != null)
                 {
-                    if (currentShape != null)
-                        currentShape.Highlight(false);
-
+                    currentShape?.Highlight(false);
                     currentShape = shape;
                     currentShape.Highlight(true);
                 }
