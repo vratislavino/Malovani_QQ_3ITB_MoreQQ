@@ -22,6 +22,16 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public Form1()
         {
             InitializeComponent();
+            canvas1.ShapesChanged += OnShapesChanged;
+        }
+
+        private void OnShapesChanged()
+        {
+            listBox1.Items.Clear();
+            foreach (var item in canvas1.Shapes)
+            {
+                listBox1.Items.Add(item);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,7 +46,14 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void LoadTypesFromAssembly(Assembly ass)
         {
             var types = ass.GetTypes();
-            var shapeTypes = types.Where(t => t.IsSubclassOf(typeof(Shape)));
+            var shapeTypes = types.Where(t => {
+                if (t.IsSubclassOf(typeof(Shape)))
+                {
+                    fileManager.AddAssembly(t, ass);
+                    return true;
+                }
+                return false;
+            });
 
             comboBox1.Items.AddRange(shapeTypes.ToArray());
         }
@@ -98,9 +115,17 @@ namespace Malovani_QQ_3ITB_MoreQQ
             {
                 string path = ofd.FileName;
                 var shapes = fileManager.LoadShapes(path);
+                int notLoadedCounter = 0;
                 foreach (var shape in shapes)
                 {
-                    canvas1.AddShape(shape);
+                    if(shape != null)
+                        canvas1.AddShape(shape);
+                    else
+                        notLoadedCounter++;
+                }
+                if(notLoadedCounter > 0)
+                {
+                    MessageBox.Show($"{notLoadedCounter} objektù se nepodaøilo naèíst, protože chybí knihovny, ze kterých byly vytvoøeny.");
                 }
             }
         }
@@ -113,14 +138,23 @@ namespace Malovani_QQ_3ITB_MoreQQ
             {
                 string path = ofd.FileName;
                 Assembly ass = fileManager.LoadAssemblyFromFile(path);
-                if(ass != null)
+
+                if (ass != null)
                 {
+                    fileManager.CacheDll(path);
                     LoadTypesFromAssembly(ass);
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Nepodaøilo se naèíst knihovnu " + path);
                 }
             }
+        }
+
+        private void loadShapesFromAppDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<Assembly> asses = fileManager.GetAllCachedDlls();
+            asses.ForEach(ass => LoadTypesFromAssembly(ass));
         }
     }
 }

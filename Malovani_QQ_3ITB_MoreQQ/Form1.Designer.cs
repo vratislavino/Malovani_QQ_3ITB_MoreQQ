@@ -39,14 +39,21 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             addMoreShapesToolStripMenuItem = new ToolStripMenuItem();
+            loadShapesFromAppDataToolStripMenuItem = new ToolStripMenuItem();
             canvas1 = new Canvas();
             statusStrip1 = new StatusStrip();
             colorDialog1 = new ColorDialog();
+            splitContainer2 = new SplitContainer();
+            listBox1 = new ListBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -67,7 +74,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(canvas1);
+            splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Panel2.Controls.Add(statusStrip1);
             splitContainer1.Size = new Size(1736, 1072);
             splitContainer1.SplitterDistance = 100;
@@ -139,7 +146,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, addMoreShapesToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, addMoreShapesToolStripMenuItem, loadShapesFromAppDataToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "File";
@@ -147,23 +154,30 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(224, 26);
+            saveToolStripMenuItem.Size = new Size(274, 26);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new Size(224, 26);
+            loadToolStripMenuItem.Size = new Size(274, 26);
             loadToolStripMenuItem.Text = "Load";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // addMoreShapesToolStripMenuItem
             // 
             addMoreShapesToolStripMenuItem.Name = "addMoreShapesToolStripMenuItem";
-            addMoreShapesToolStripMenuItem.Size = new Size(224, 26);
+            addMoreShapesToolStripMenuItem.Size = new Size(274, 26);
             addMoreShapesToolStripMenuItem.Text = "Add more shapes";
             addMoreShapesToolStripMenuItem.Click += addMoreShapesToolStripMenuItem_Click;
+            // 
+            // loadShapesFromAppDataToolStripMenuItem
+            // 
+            loadShapesFromAppDataToolStripMenuItem.Name = "loadShapesFromAppDataToolStripMenuItem";
+            loadShapesFromAppDataToolStripMenuItem.Size = new Size(274, 26);
+            loadShapesFromAppDataToolStripMenuItem.Text = "Load shapes from AppData";
+            loadShapesFromAppDataToolStripMenuItem.Click += loadShapesFromAppDataToolStripMenuItem_Click;
             // 
             // canvas1
             // 
@@ -172,7 +186,7 @@
             canvas1.Dock = DockStyle.Fill;
             canvas1.Location = new Point(0, 0);
             canvas1.Name = "canvas1";
-            canvas1.Size = new Size(1736, 946);
+            canvas1.Size = new Size(1427, 946);
             canvas1.TabIndex = 1;
             // 
             // statusStrip1
@@ -183,6 +197,32 @@
             statusStrip1.Size = new Size(1736, 22);
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(canvas1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(listBox1);
+            splitContainer2.Size = new Size(1736, 946);
+            splitContainer2.SplitterDistance = 1427;
+            splitContainer2.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            listBox1.Dock = DockStyle.Fill;
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(0, 0);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(305, 946);
+            listBox1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -202,6 +242,10 @@
             splitContainer1.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -221,5 +265,8 @@
         private ColorDialog colorDialog1;
         private StatusStrip statusStrip1;
         private Canvas canvas1;
+        private ToolStripMenuItem loadShapesFromAppDataToolStripMenuItem;
+        private SplitContainer splitContainer2;
+        private ListBox listBox1;
     }
 }
