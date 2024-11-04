@@ -6,16 +6,16 @@ namespace Malovani_QQ_3ITB_MoreQQ
     public partial class Form1 : Form
     {
         /*
-     Zeptat se DJ na svìtla
+     Zeptat se DJ na svï¿½tla
      TODO: 
      * volba barvy ---
-     * hezèí vykreslení ---
-     * hezèí èára ---
-     * pøesouvání objektù ---
-     * clear objektù ---
+     * hezï¿½ï¿½ vykreslenï¿½ ---
+     * hezï¿½ï¿½ ï¿½ï¿½ra ---
+     * pï¿½esouvï¿½nï¿½ objektï¿½ ---
+     * clear objektï¿½ ---
      * square ---
      * reflexe - (assembly)
-     * ukládání
+     * uklï¿½dï¿½nï¿½
      */
 
         FileManager fileManager = new FileManager();
@@ -110,7 +110,6 @@ namespace Malovani_QQ_3ITB_MoreQQ
             {
                 string path = ofd.FileName;
                 var shapes = fileManager.LoadShapes(path);
-
                 foreach (var shape in shapes)
                 {
                     canvas1.AddShape(shape);

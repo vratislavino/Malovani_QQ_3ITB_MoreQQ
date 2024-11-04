@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Malovani_QQ_3ITB_MoreQQ
 {
-    class FileManager
+    internal class FileManager
     {
         public void SaveShapes(string path, IEnumerable<Shape> shapes)
         {
@@ -34,12 +34,11 @@ namespace Malovani_QQ_3ITB_MoreQQ
             {
                 return Assembly.LoadFrom(path);
             }
-            catch
+            catch (Exception e)
             {
-                Console.WriteLine("Failed to load assembly from file");
+                Console.WriteLine(e.Message);
                 return null;
             }
-
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         protected int height;
         protected bool filled;
         protected Color color;
-        protected Pen pen;
+        public Pen pen;
         protected Brush brush;
 
         private bool highlighted;
@@ -31,11 +31,9 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.y = y - height / 2;
             this.filled = filled;
             this.color = color;
-
+            
             InitRuntimeValues();
         }
-
-
 
         public Shape(ShapeDTO data)
         {
@@ -57,6 +55,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
             outlinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             outlinePen.DashPattern = new float[] { 5, 5 };
         }
+
 
         public void Highlight(bool enable)
         {
@@ -101,23 +100,21 @@ namespace Malovani_QQ_3ITB_MoreQQ
             public int g;
             public int b;
 
-            public string ShapeType;
+            public string shapeType;
 
-            public ShapeDTO()
-            {
-            }
+            public ShapeDTO() { }
 
-            public ShapeDTO(Shape shape)
+            public ShapeDTO(Shape s)
             {
-                x = shape.x;
-                y = shape.y;
-                width = shape.width;
-                height = shape.height;
-                filled = shape.filled;
-                r = shape.color.R;
-                g = shape.color.G;
-                b = shape.color.B;
-                ShapeType = shape.GetType().ToString();
+                this.x = s.x;
+                this.y = s.y;
+                this.width = s.width;
+                this.height = s.height;
+                this.filled = s.filled;
+                this.r = s.color.R;
+                this.g = s.color.G;
+                this.b = s.color.B;
+                this.shapeType = s.GetType().ToString();
             }
         }
     }

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Malovani_QQ_3ITB_MoreQQ", "Malovani_QQ_3ITB_MoreQQ\Malovani_QQ_3ITB_MoreQQ.csproj", "{62ABB011-5E6A-4325-BCB6-EEF51D918084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreShapes", "MoreShapes\MoreShapes.csproj", "{39FAF165-DB95-471A-8169-1C66E01DC079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreShapes", "MoreShapes\MoreShapes.csproj", "{39FAF165-DB95-471A-8169-1C66E01DC079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JanxyxyShapes", "JanxyxyShapes\JanxyxyShapes.csproj", "{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JanxyxyShapes", "JanxyxyShapes\JanxyxyShapes.csproj", "{C565DAAD-17CA-4F32-9A91-36A877BEF4FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
